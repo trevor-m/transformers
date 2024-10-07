@@ -135,7 +135,7 @@ class LlamaRotaryEmbedding(nn.Module):
             self.max_seq_len_cached = seq_len
 
         if seq_len < self.original_max_seq_len and self.max_seq_len_cached > self.original_max_seq_len:  # reset
-            self.register_buffer("inv_freq", self.original_inv_freq, persistent=False)
+            self.register_buffer("inv_freq", self.original_inv_freq.to(device), persistent=False)
             self.max_seq_len_cached = self.original_max_seq_len
 
     @torch.no_grad()
